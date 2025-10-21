@@ -757,7 +757,7 @@ const AIChat = ({ documents, setToast, navigate }) => {
                                             <p className="text-xs mt-1 text-gray-700 italic">
                                                 Feedback: {msg.feedback}
                                             </p>
-                                            {msg.citations && msg.citations.map((index) => (
+                                            {msg.citations && msg.citations.filter(index => index !== 0).map((index) => (
                                                 <button
                                                     key={index}
                                                     onClick={() => openCitationModal(index)}
