@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 
 // --- Real API Client for Backend Integration ---
-const BASE_URL = 'http://localhost:5000/api';
+const BASE_URL = 'https://ai-interview-prep-rmgs.onrender.com/api';
 const LOCAL_TOKEN_KEY = 'jwt_token';
 
 const getAuthHeaders = () => {
