@@ -1,0 +1,11 @@
+/* Apply the Inter font globally */
+body {
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Optional: Custom style to ensure the main app container fills the screen */
+#root, #app {
+  min-height: 100vh;
+}
