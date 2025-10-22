@@ -179,43 +179,42 @@ const Toast = ({ message, type, onClose }) => {
 };
 
 const Header = ({ isLoggedIn, user, navigate, handleLogout, status }) => (
-    // IMPROVEMENT 1: Added subtle top-border on scroll animation effect (shadow-xl)
-    <header className="sticky top-0 z-10 flex justify-between items-center p-5 bg-white shadow-xl transition-shadow duration-300 border-b border-gray-100">
+    // Base padding reduced (p-3) for mobile, p-5 used for larger screens (sm:p-5)
+    <header className="sticky top-0 z-10 flex justify-between items-center p-3 sm:p-5 bg-white shadow-xl transition-shadow duration-300 border-b border-gray-100">
         <h1 
-            // IMPROVEMENT 2: Add subtle press animation (scale) on click
-            className="text-2xl font-extrabold text-indigo-700 cursor-pointer transition-all duration-150 hover:text-indigo-600 hover:scale-[1.01] active:scale-[0.98]" 
+            // Base font size reduced (text-xl) for mobile, increased for larger screens (sm:text-2xl)
+            className="text-xl sm:text-2xl font-extrabold text-indigo-700 cursor-pointer transition-all duration-150 hover:text-indigo-600 hover:scale-[1.01] active:scale-[0.98]" 
             onClick={() => navigate('landing')}
         >
             AI Interview Prep
         </h1>
-        <nav className="space-x-6 flex items-center">
+        <nav className="space-x-2 sm:space-x-6 flex items-center">
             {isLoggedIn ? (
                 <>
-                    {/* User name: No animation needed, keep it static */}
+                    {/* User name: Always hidden on mobile (hidden sm:inline) */}
                     <span className="text-sm hidden sm:inline text-gray-700 font-medium pr-3 border-r border-gray-300">
                         {user?.name || 'Guest'}
                     </span>
                     
-                    {/* Upload Button: Bounce effect on hover */}
+                    {/* Docs Ready / Upload Button: Smaller text (text-xs) and less padding on mobile */}
                     <button
                         onClick={() => navigate('upload')}
-                        // Added transform and hover:translate-y-[-1px] for a slight lift
-                        className={`text-sm font-semibold transition-all duration-200 p-1 rounded-md transform hover:-translate-y-[1px] ${
+                        className={`text-xs sm:text-sm font-semibold transition-all duration-200 p-1 rounded-md transform hover:-translate-y-[1px] ${
                             status.documentsReady 
                                 ? 'text-green-600 hover:bg-green-50' 
                                 : 'text-indigo-600 hover:bg-indigo-50'
                         }`}
                     >
-                        {status.documentsReady ? 'Docs Ready (Go)' : 'Upload Documents'}
+                        {/* Shorter text for mobile visibility */}
+                        {status.documentsReady ? 'Docs Ready' : 'Upload'}
                     </button>
                     
-                    {/* Chat Button: Primary action gets a pulse/shadow animation */}
+                    {/* Chat Button: Smaller text (text-xs) and less padding on mobile */}
                     <button
                         onClick={() => navigate('chat')}
-                        // Added shadow, hover:shadow-lg, and slightly more pronounced hover state
-                        className={`text-sm font-semibold transition-all duration-300 py-1 px-3 rounded-lg transform ${
+                        className={`text-xs sm:text-sm font-semibold transition-all duration-300 py-1 px-2 sm:px-3 rounded-lg transform ${
                             status.documentsReady 
-                                ? ' text-indigo-600  hover:shadow-md' 
+                                ? ' text-indigo-600 hover:text-indigo-700 hover:shadow-md' 
                                 : 'text-gray-400 cursor-not-allowed bg-gray-100'
                         }`}
                         disabled={!status.documentsReady}
@@ -223,11 +222,10 @@ const Header = ({ isLoggedIn, user, navigate, handleLogout, status }) => (
                         Start Chat
                     </button>
                     
-                    {/* Logout Button: Clear indication of being clickable */}
+                    {/* Logout Button: Smaller text (text-xs) and less padding on mobile */}
                     <button
                         onClick={handleLogout}
-                        // Added ring on active/focus state
-                        className="text-sm font-medium text-red-500 hover:text-red-700 transition-all p-1 rounded-md hover:bg-red-50 focus:ring-2 focus:ring-red-300 active:bg-red-100"
+                        className="text-xs sm:text-sm font-medium text-red-500 hover:text-red-700 transition-all p-1 rounded-md hover:bg-red-50 focus:ring-2 focus:ring-red-300 active:bg-red-100"
                     >
                         Logout
                     </button>
