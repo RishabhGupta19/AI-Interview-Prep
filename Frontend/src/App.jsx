@@ -61,7 +61,7 @@ const apiClient = {
     }
 };
 
-// ⬇️ NEW: Dedicated helper for FormData file uploads 
+//  Dedicated helper for FormData file uploads 
 const uploadFile = async (file, type) => {
     const formData = new FormData();
     formData.append('file', file);
@@ -120,7 +120,7 @@ const MessageSquare = (props) => <svg {...props} xmlns="http://www.w3.org/2000/s
 
 
 // --- Components ---
-// --- NEW: Typewriter Effect Component ---
+// ---  Typewriter Effect Component ---
 const Typewriter = ({ text, speed = 100 }) => {
     const [displayedText, setDisplayedText] = useState('');
     const [index, setIndex] = useState(0);
@@ -237,7 +237,7 @@ const Header = ({ isLoggedIn, user, navigate, handleLogout, status }) => (
     </header>
 );
 const AuthForm = ({ type, navigate, setIsLoggedIn, setUser, setToast, setDocuments }) => {
-    // ⬇️ ADD setDocuments to destructuring ⬆️
+    //  ADD setDocuments to destructuring 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
@@ -286,7 +286,7 @@ const AuthForm = ({ type, navigate, setIsLoggedIn, setUser, setToast, setDocumen
             console.log(data.user.name);
             setToast({ message: 'Login successful!', type: 'success' });
             
-            // ⬇️ CRITICAL FIX: Fetch and set documents on login
+            //  CRITICAL FIX: Fetch and set documents on login
             const docs = await fetchUserDocuments(data.token);
             setDocuments(docs);
             // ---------------------------------------------------
@@ -408,7 +408,7 @@ const DocumentManager = ({ documents, setDocuments, setToast, user, navigate }) 
         if (type === 'jd') setJdFile(file);
     };
 
-    // ⬇️ REFACTORED: Use backend for upload
+    //  REFACTORED: Use backend for upload
     const handleUpload = async () => {
         if (!resumeFile || !jdFile) {
             setToast({ message: 'Please upload both a Resume and a Job Description.', type: 'error' });
@@ -447,7 +447,7 @@ const DocumentManager = ({ documents, setDocuments, setToast, user, navigate }) 
         }
     };
 
-    // ⬇️ REFACTORED: Use backend for delete
+    //  REFACTORED: Use backend for delete
     const handleDelete = async (id) => {
         try {
             // Call backend DELETE endpoint
@@ -593,7 +593,7 @@ const CitationModal = ({ isOpen, onClose, citationText, type }) => {
 
 
 const AIChat = ({ documents, setToast, navigate }) => {
-    // ⬇️ CRITICAL FIX: Add chatId state
+    //  CRITICAL FIX: Add chatId state
     const [messages, setMessages] = useState([]);
     const [inputMessage, setInputMessage] = useState('');
     const [loading, setLoading] = useState(false);
@@ -605,7 +605,7 @@ const AIChat = ({ documents, setToast, navigate }) => {
     const resumeDoc = documents.find(d => d.type === 'resume');
     const jdDoc = documents.find(d => d.type === 'jd');
 
-    // ⬇️ REFACTORED: Use apiClient and save chatId
+    //  REFACTORED: Use apiClient and save chatId
     const handleStartInterview = async () => {
         setLoading(true);
         setToast({ message: 'Generating initial questions...', type: 'loading' });
@@ -632,7 +632,7 @@ const AIChat = ({ documents, setToast, navigate }) => {
         }
     };
 
-    // ⬇️ REFACTORED: Use chatId and userMessage
+    //  REFACTORED: Use chatId and userMessage
     const handleSend = async (e) => {
         e.preventDefault();
         
@@ -808,7 +808,7 @@ const App = () => {
     const [documents, setDocuments] = useState([]);
     const [toast, setToast] = useState(null);
 
-    // ⬇️ NEW: Helper function to fetch docs 
+    //  Helper function to fetch docs 
     const fetchUserDocuments = useCallback(async () => {
         if (localStorage.getItem(LOCAL_TOKEN_KEY)) {
             try {
@@ -861,7 +861,7 @@ const App = () => {
         if (!isLoggedIn) {
             switch (route) {
                 case 'login':
-                    // ⬇️ Passed setDocuments to AuthForm 
+                    //  Passed setDocuments to AuthForm 
                     return <AuthForm type="login" navigate={navigate} setIsLoggedIn={setIsLoggedIn} setUser={setUser} setToast={setToast} setDocuments={setDocuments} />;
                 case 'signup':
                     return <AuthForm type="signup" navigate={navigate} setIsLoggedIn={setIsLoggedIn} setUser={setUser} setToast={setToast} />;
